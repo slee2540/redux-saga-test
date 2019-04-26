@@ -1,0 +1,23 @@
+.wrapper {
+  flex-direction: column;
+}
+
+.headerWrapper {
+  flex: 1;
+}
+
+.containerWrapper {
+  /* flex: 1; */
+  display: flex;
+  flex-direction: row;
+}
+
+.leftWrapper {
+  flex: 1;
+  border: 1px solid red;
+}
+
+.rightWrapper {
+  flex: 1;
+  border: 1px solid blue;
+}
