@@ -5,19 +5,32 @@ import { bindActionCreators } from "redux";
 import shortid from "shortid";
 import PropTypes from "prop-types";
 import * as listAction from "actions";
-import css from "containers/layout.module.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import css from "containers/layout.module.css";
 
 // import xml from "xml2js";
 
 class LeftTextList extends React.Component {
   state = {
-    list: []
+    list: [],
+    pageNo: "",
+    numOfRows: "",
+    startDate: new Date()
+  };
+
+  handleChange = date => {
+    this.setState({
+      startDate: date
+    });
   };
 
   xml2json = () => {
+    const { pageNo, numOfRows } = this.state;
+
     const xmlTest = axios({
       method: "GET",
-      url: "users"
+      url: `users?pageNo=${pageNo}&numOfRows=${numOfRows}`
     })
       .then(res => res.data)
       .catch(error => {
@@ -32,15 +45,29 @@ class LeftTextList extends React.Component {
     });
   };
 
-  render() {
-    const { ListAction, news } = this.props;
-    const { list } = this.state;
+  onchangeText = id => {
+    return e => {
+      const scope = {};
+      scope[id] = e.target.value;
+      // console.log(e.target.value,id)
+      this.setState(scope);
+    };
+  };
 
+  render() {
+    // const { ListAction, news } = this.props;
+    const { news } = this.props;
+    const { list, startDate } = this.state;
+    // console.log(id,age)
     return (
       <div>
-        <button type="submit" onClick={ListAction.requestApi}>
+        <input type="text" onChange={this.onchangeText("pageNo")} />
+        <input type="text" onChange={this.onchangeText("numOfRows")} />
+
+        <DatePicker selected={startDate} onChange={this.handleChange} />
+        {/* <button type="submit" onClick={ListAction.requestApi}>
           눌러봐봐!
-        </button>
+        </button> */}
         <button type="submit" onClick={this.xml2json}>
           Xml Parsing
         </button>
@@ -58,21 +85,35 @@ class LeftTextList extends React.Component {
           })}
         </ul>
         {/* <img src={article.urlToImage} alt="" /> */}
-        {list.length > 0
-          ? list.map(item => {
-              return (
-                <div key={shortid.generate()}>
-                  <div className={css.listWrapper}>{item["거래금액"]}</div>
-                  <div className={css.listWrapper}>{item["건축년도"]}</div>
-                  <div className={css.listWrapper}>{item["년"]}</div>
-                  <div className={css.listWrapper}>{item["도로명"]}</div>
-                  <div className={css.listWrapper}>
-                    {item["도로명건물본번호코드"]}
-                  </div>
-                </div>
-              );
-            })
-          : null}
+        <table style={{ textAlign: "center" }}>
+          <caption>아파트매매 실거래 상세 자료</caption>
+          <thead>
+            <tr>
+              <th>없음</th>
+              <th>거래금액</th>
+              <th>건축년도</th>
+              <th>년</th>
+              <th>도로명</th>
+              <th>도로명건물본번호코드</th>
+            </tr>
+          </thead>
+          <tbody>
+            {list.length > 0
+              ? list.map((item, index) => {
+                  return (
+                    <tr key={shortid.generate()}>
+                      <th>{index}</th>
+                      <td>{item["거래금액"]}</td>
+                      <td>{item["건축년도"]}</td>
+                      <td>{item["년"]}</td>
+                      <td>{item["도로명"]}</td>
+                      <td>{item["도로명건물본번호코드"]}</td>
+                    </tr>
+                  );
+                })
+              : null}
+          </tbody>
+        </table>
       </div>
     );
   }
