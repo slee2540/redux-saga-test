@@ -1,7 +1,7 @@
 import React from "react";
 import css from "containers/layout.module.css";
 import LeftTextList from "containers/LeftTextList";
-import RightImage from "containers/RightImage";
+// import RightImage from "containers/RightImage";
 import Loading from "containers/loading";
 
 const App = () => {
@@ -14,9 +14,9 @@ const App = () => {
         <div className={css.leftWrapper}>
           <LeftTextList />
         </div>
-        <div className={css.rightWrapper}>
+        {/* <div className={css.rightWrapper}>
           <RightImage />
-        </div>
+        </div> */}
       </div>
     </div>
   );
