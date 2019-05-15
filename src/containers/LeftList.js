@@ -86,7 +86,6 @@ class LeftTextList extends React.Component {
           throw error;
         });
     } else {
-      console.log("이쪽");
       xml = axios({
         method: "GET",
         url: `aptJunseRent?date=${selectedDate}&gu=${selectedItem}`
