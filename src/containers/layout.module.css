@@ -12,6 +12,10 @@
   flex-direction: row;
 }
 
+/* .leftSideBar {
+  width: 10rem;
+} */
+
 .leftWrapper {
   flex: 1;
   /* border: 1px solid red; */

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
-import * as listAction from "actions";
+import * as listAction from "actions/list";
 
 class RightImage extends React.Component {
   render() {
@@ -11,9 +11,11 @@ class RightImage extends React.Component {
     return (
       <div>
         <ul>
-          {news.map(item => {
-            return <li key={item.title}>{item.title}</li>;
-          })}
+          {news.length > 0
+            ? news.map(item => {
+                return <li key={item.title}>{item.title}</li>;
+              })
+            : null}
         </ul>
       </div>
     );

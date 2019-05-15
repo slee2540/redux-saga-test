@@ -1,28 +1,11 @@
-import produce from "immer";
-import * as type from "actions/type/list";
+import { combineReducers } from "redux";
 
-const initialState = {
-  news: [],
-  loading: false
-};
+import list from "./list";
+import header from "./header";
 
-const list = (state = initialState, action) =>
-  produce(state, draft => {
-    switch (action.type) {
-      case type.REQUEST_API:
-        // console.log("REQUEST_API", action);
-        draft.loading = true;
-        break;
+const reducers = combineReducers({
+  list,
+  header
+});
 
-      case type.REQUEST_API_SUCCESS:
-        // console.log("REQUEST_API_SUCCESS", action);
-        draft.news = action.json;
-        draft.loading = false;
-        break;
-
-      default:
-        return state;
-    }
-  });
-
-export default list;
+export default reducers;

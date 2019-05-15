@@ -1,25 +1,26 @@
 import React from "react";
-import css from "containers/layout.module.css";
-import LeftTextList from "containers/LeftTextList";
-// import RightImage from "containers/RightImage";
-import Loading from "containers/loading";
+import LeftList from "containers/LeftList";
+import Header from "components/header";
+// import RightList from "containers/RightList";
+// import Loading from "containers/loading";
+import scss from "containers/main.module.scss";
 
 const App = () => {
   return (
-    <div className={css.wrapper}>
-      <div className={css.headerWrapper}>
-        <Loading />
+    <div className={scss.wrapper}>
+      <div className={scss.headerWrapper}>
+        {/* <Loading /> */}
+        <Header />
       </div>
-      <div className={css.containerWrapper}>
-        <div className={css.leftWrapper}>
-          <LeftTextList />
+      <div className={scss.containerWrapper}>
+        <div className={scss.leftWrapper}>
+          <LeftList />
         </div>
-        {/* <div className={css.rightWrapper}>
-          <RightImage />
-        </div> */}
+        <div className={scss.rightWrapper}>
+          <LeftList />
+        </div>
       </div>
     </div>
   );
 };
-
 export default App;
