@@ -2,12 +2,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
+import cx from "classnames";
 import * as headerAction from "actions/header";
 import scss from "containers/main.module.scss";
 
 class Header extends React.Component {
   render() {
-    const { HeaderAction } = this.props;
+    const { HeaderAction, selectedHeader } = this.props;
+
+    const headerClass = id =>
+      cx({
+        [scss.headerBtn]: true,
+        [scss.buttonColor]: selectedHeader === id
+      });
 
     return (
       <div className={scss.inlineBox}>
@@ -15,7 +22,7 @@ class Header extends React.Component {
           <li className={scss.inlineBox}>
             <button
               type="submit"
-              className={scss.headerBtn}
+              className={headerClass("aptTransaction")}
               onClick={() => HeaderAction.selectHeader("aptTransaction")}
             >
               아파트매매 실거래자료
@@ -24,7 +31,7 @@ class Header extends React.Component {
           <li className={scss.inlineBox}>
             <button
               type="submit"
-              className={scss.headerBtn}
+              className={headerClass("aptJunseRent")}
               onClick={() => HeaderAction.selectHeader("aptJunseRent")}
             >
               아파트 전월세 자료
@@ -33,7 +40,7 @@ class Header extends React.Component {
           <li className={scss.inlineBox}>
             <button
               type="submit"
-              className={scss.headerBtn}
+              className={headerClass("aptTransactionDetail")}
               onClick={() => HeaderAction.selectHeader("aptTransactionDetail")}
             >
               아파트매매 실거래 상세 자료
@@ -46,16 +53,18 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  HeaderAction: PropTypes.object
+  HeaderAction: PropTypes.object,
+  selectedHeader: PropTypes.string
 };
 
 Header.defaultProps = {
-  HeaderAction: {}
+  HeaderAction: {},
+  selectedHeader: ""
 };
 
 export default connect(
   state => ({
-    selectedHeader: state.selectedHeader
+    selectedHeader: state.header.selectedHeader
   }),
   dispatch => ({
     HeaderAction: bindActionCreators(headerAction, dispatch)

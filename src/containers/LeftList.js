@@ -16,7 +16,8 @@ import "react-datepicker/dist/react-datepicker.css";
 const options = [
   { value: "11200", label: "성동구" },
   { value: "11215", label: "광진구" },
-  { value: "11710", label: "송파구" }
+  { value: "11710", label: "송파구" },
+  { value: "11440", label: "마포구" }
 ];
 
 const styles = {
