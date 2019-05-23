@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 import shortid from "shortid";
 import PropTypes from "prop-types";
+import { Bar } from "react-chartjs-2";
 // import * as listAction from "actions/list";
 // import * as headerAction from "actions/header";
 import DatePicker from "react-datepicker";
@@ -19,6 +20,21 @@ const options = [
   { value: "11710", label: "송파구" },
   { value: "11440", label: "마포구" }
 ];
+
+const data = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      // label: "My First dataset",
+      backgroundColor: "rgba(255,99,132,0.2)",
+      // borderColor: "rgba(255,99,132,1)",
+      // borderWidth: 1,
+      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      // hoverBorderColor: "rgba(255,99,132,1)",
+      data: [65, 59, 80, 81, 56, 55, 60]
+    }
+  ]
+};
 
 const styles = {
   control: base => ({
@@ -186,6 +202,15 @@ class LeftTextList extends React.Component {
             </button>
           </form>
         </div>
+
+        <Bar
+          data={data}
+          width={100}
+          height={50}
+          options={{
+            maintainAspectRatio: true
+          }}
+        />
 
         <div className={scss.aptList}>
           {list.length > 0 ? (

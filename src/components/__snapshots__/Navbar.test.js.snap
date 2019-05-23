@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component matches the snapshot 1`] = `
+<div>
+  <p>
+    Count: 
+    0
+  </p>
+  <button
+    className="increment"
+    onClick={[Function]}
+    type="button"
+  >
+    Increment count
+  </button>
+  <button
+    className="decrement"
+    onClick={[Function]}
+    type="button"
+  >
+    Decrement count
+  </button>
+</div>
+`;

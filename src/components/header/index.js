@@ -46,6 +46,15 @@ class Header extends React.Component {
               아파트매매 실거래 상세 자료
             </button>
           </li>
+          <li className={scss.inlineBox}>
+            <button
+              type="submit"
+              className={headerClass("graph")}
+              onClick={() => HeaderAction.selectHeader("graph")}
+            >
+              차트 분석
+            </button>
+          </li>
         </ul>
       </div>
     );
